@@ -1,0 +1,10 @@
+name: a-table
+channels:
+  - defaults
+  - conda-forge
+dependencies:
+  - urllib
+  - python=3.6
+  - requests
+  - aiohttp
+  - beautifulsoup4
