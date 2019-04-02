@@ -3,8 +3,12 @@ channels:
   - defaults
   - conda-forge
 dependencies:
-  - urllib
   - python=3.6
+  - Flask
   - requests
   - aiohttp
   - beautifulsoup4
+  - ipython
+  - pip:
+          - Flask-Ask
+          - cryptography<2.2
