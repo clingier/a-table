@@ -1,4 +1,5 @@
 """Fonctions qui interagissent avec marmitton."""
+import re
 from typing import Dict, List
 from urllib.parse import urlencode
 
@@ -60,6 +61,7 @@ def get_recette_par_etape(recipe_url: str) -> Dict[str, List[str]]:
     Return
     ------
     Un dictionnaire de cette forme dict_ = {'ingredients': [..], 'etapes':[..]}
+
     Exemple:
     oeuf_a_la_coque = {
         'ingredients': ['oeuf'],
@@ -67,8 +69,29 @@ def get_recette_par_etape(recipe_url: str) -> Dict[str, List[str]]:
     }
     """
     marmiton_url = 'https://www.marmiton.org'
+
+    # Requete a marmitton
     response = requests.get(marmiton_url + recipe_url)
+
+    # Initialisation de bs4 pour scraper
     soup = BeautifulSoup(response.text)
+
+    # Scrap des ingredients
     ingredients = soup.select('.recipe-ingredients__list__item')
+
+    # Supp. des espaces par exemple 'debut\n\n\n\n\n\n suite'->'debut suite'
     ingredients = [re.sub(r'\s+', ' ', ing.text.strip())
                    for ing in ingredients]
+
+    # Scrap des etapes
+    etapes = soup.select(".recipe-preparation__list__item")
+
+    # Supp. des espaces.
+    etapes = [re.sub(r'\s+', ' ', etape.text.strip()) for etape in etapes]
+
+    recipe_dict = {}
+
+    recipe_dict['ingredients'] = ingredients
+    recipe_dict['etapes'] = etapes
+
+    return recipe_dict
