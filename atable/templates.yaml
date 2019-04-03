@@ -1,7 +1,9 @@
-atable_ouverture: Etes-vous prets a cuisiner?
+atable_ouverture: Bienvenue sur a table, si vous desirez de l'aide dites 'j'ai besoin d'aide'
 
 atable_rappel: Est ce que vous etes encore la ? Dites moi quand vous etes prets!
 
 atable_demarrage: Ok super!
 
 atable_fin: Fermeture de "a table"
+
+atable_choix_recherche: Voulez vous rechercher une recette par ingredients?

@@ -1,3 +1,4 @@
+"""Fonctions qui interagissent avec marmitton."""
 from typing import Dict, List
 from urllib.parse import urlencode
 
