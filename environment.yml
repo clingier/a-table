@@ -9,6 +9,8 @@ dependencies:
   - aiohttp
   - beautifulsoup4
   - ipython
+  - pandas
+  - unidecode
   - pip:
           - Flask-Ask
           - cryptography<2.2
