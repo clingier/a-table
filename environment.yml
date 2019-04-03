@@ -8,9 +8,12 @@ dependencies:
   - requests
   - aiohttp
   - beautifulsoup4
+  - pytest
+  - pytest-cov
+  - pytest-xdist
   - ipython
   - pandas
   - unidecode
   - pip:
-          - Flask-Ask
-          - cryptography<2.2
+    - Flask-Ask
+    - cryptography<2.2
