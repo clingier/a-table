@@ -7,7 +7,7 @@ import requests
 from bs4 import BeautifulSoup
 
 
-def api_requests(url: str) -> List[Dict[str, str]]:
+def api_request(url: str) -> List[Dict[str, str]]:
     """Fait une requete au site de Marmiton.
 
     Arguments
@@ -46,5 +46,29 @@ def recherche_par_ingredients(ingredients: List[str]) -> List[Dict[str, str]]:
     """
     url = 'https://www.marmiton.org/recettes/recherche.aspx?'
     encoded = urlencode({"aqt": "-".join(ingredients), "st": 1})
-    results = api_requests(url + encoded)
+    results = api_request(url + encoded)
     return results
+
+
+def get_recette_par_etape(recipe_url: str) -> Dict[str, List[str]]:
+    """Obtient la structure d'une recette, cad les etapes et les ingredients.
+
+    Arguments
+    ---------
+    recipe_url: adresse vers la recette a scraper.
+
+    Return
+    ------
+    Un dictionnaire de cette forme dict_ = {'ingredients': [..], 'etapes':[..]}
+    Exemple:
+    oeuf_a_la_coque = {
+        'ingredients': ['oeuf'],
+        'etapes' : ['faire bouillir de l'eau', 'plonger l'oeuf', ..]
+    }
+    """
+    marmiton_url = 'https://www.marmiton.org'
+    response = requests.get(marmiton_url + recipe_url)
+    soup = BeautifulSoup(response.text)
+    ingredients = soup.select('.recipe-ingredients__list__item')
+    ingredients = [re.sub(r'\s+', ' ', ing.text.strip())
+                   for ing in ingredients]
