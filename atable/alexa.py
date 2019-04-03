@@ -2,8 +2,10 @@
 import datetime
 import logging
 
+from api import recherche_par_ingredients
 from flask import Flask, render_template
 from flask_ask import Ask, context, delegate, question, session, statement
+from utils import normalize_aliment_lists
 
 app = Flask(__name__)
 ask = Ask(app, '/')
@@ -25,11 +27,15 @@ def atable_welcome():
 @ask.intent(
     'RechercheParIngredients',
     mapping={
-        'aliments': 'aliments',
+        'aliments_phrase': 'aliments',
     })
-def exec_recherche_par_ingredients(aliments):
-    aliments = aliments.split(' ')
-    return statement(f"{aliments}")
+def exec_recherche_par_ingredients(aliments_phrase):
+    aliments = normalize_aliment_lists(aliments_phrase)
+    recettes = recherche_par_ingredients(aliments)
+    intro = render_template('atable_resultat')
+    titres_recettes = [recette['title'] for recette in recettes]
+    reponse_alexa = ", ".join(titres_recettes)
+    return statement(intro + reponse_alexa)
 
 
 @ask.intent('AMAZON.YesIntent')
@@ -46,7 +52,7 @@ def response():
 @ask.intent('AMAZON.CancelIntent')
 @ask.intent('AMAZON.StopIntent')
 @ask.intent('AMAZON.NoIntent')
-def trip_nogo():
+def nogo():
     fin = render_template('atable_fin')
     return statement(fin)
 

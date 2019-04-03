@@ -6,8 +6,6 @@ import pandas as pd
 
 from unidecode import unidecode
 
-from . import ROOT_DIR
-
 
 def normalize_aliment_lists(string: str) -> List[str]:
     """Trouve les aliments citee dans une phrase et renvoie une liste.
@@ -15,7 +13,7 @@ def normalize_aliment_lists(string: str) -> List[str]:
     Unidecode est utilise pour normaliser les phrase afin de retirer les
     accents des mots. Tout les mots sont mis en minuscule aussi.
 
-    Args
+    Arguments
     ----
     string: La phrase qui contient plein de mots, dont certains sont des
     aliments
@@ -28,7 +26,7 @@ def normalize_aliment_lists(string: str) -> List[str]:
     liste_aliments = []
 
     # Recupere la base de donnee
-    df = pd.read_csv(os.path.join(ROOT_DIR, 'ingredients.csv'))
+    df = pd.read_csv('ingredients.csv')
 
     # NORMALISATION:
     # Enleve les accents et les caractere non-ascii
@@ -36,10 +34,10 @@ def normalize_aliment_lists(string: str) -> List[str]:
     # Mets toute la phrase en minuscule
     string = string.lower()
 
-    for word in string.split():
-        # Pour chaque mots
-        if word in df.ingredients.values:
-            # si le mot est dans notre base de donnee, on l'ajoute.
-            liste_aliments.append(word)
+    for ingredient in df.ingredients.values:
+        # Pour chaque ingredient dans la base de donnee
+        if ingredient in string:
+            # si il est dans la phrase, on l'ajoute.
+            liste_aliments.append(ingredient)
 
     return liste_aliments
