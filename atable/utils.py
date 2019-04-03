@@ -6,6 +6,8 @@ import pandas as pd
 
 from unidecode import unidecode
 
+ROOT_DIR = os.path.dirname(os.path.abspath(__file__))
+
 
 def normalize_aliment_lists(string: str) -> List[str]:
     """Trouve les aliments citee dans une phrase et renvoie une liste.
@@ -26,7 +28,7 @@ def normalize_aliment_lists(string: str) -> List[str]:
     liste_aliments = []
 
     # Recupere la base de donnee
-    df = pd.read_csv('ingredients.csv')
+    df = pd.read_csv(os.path.join(ROOT_DIR, 'ingredients.csv'))
 
     # NORMALISATION:
     # Enleve les accents et les caractere non-ascii

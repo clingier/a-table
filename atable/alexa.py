@@ -33,9 +33,9 @@ def exec_recherche_par_ingredients(aliments_phrase):
     aliments = normalize_aliment_lists(aliments_phrase)
     recettes = recherche_par_ingredients(aliments)
     intro = render_template('atable_resultat')
-    titres_recettes = [recette['title'] for recette in recettes]
+    titres_recettes = [recette['title'] for recette in recettes][:3]
     reponse_alexa = ", ".join(titres_recettes)
-    return statement(intro + reponse_alexa)
+    return statement(f"{intro}: {reponse_alexa}")
 
 
 @ask.intent('AMAZON.YesIntent')
