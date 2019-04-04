@@ -37,3 +37,18 @@ Alexa separe bien toutes les etapes de la recette, l'utilisateur.
 Il dit a alexa quand passer a l'etape suivante.
 
 Et peut demander de repeter si il le faut.
+
+# Tutoriel Installation
+
+1. Clonez ce repo avec `git clone https://github.com/clingier/a-table.git`.
+2. Installez [Miniconda avec Python 3](https://conda.io/miniconda.html).
+   Si vous avez deja `conda` installe, vous pouvez executez `conda update -n base conda`.
+3. Executez `conda env create -f environment.yml` a partir de la ou vous avez clone le repo
+4. Activez l'environnement en executant
+    pour mac:
+        `source activate open-for-business-local-env`
+    pour windows:
+        `set PATH=C:\Anaconda\envs\a-table\Scripts;C:\Anaconda\envs\a-table;%PATH%`
+        `activate a-table` -> pas sur que ca fonctionne
+
+    Si vous avez des erreurs essayez -> `conda activate a-table`
