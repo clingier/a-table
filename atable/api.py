@@ -9,16 +9,21 @@ from bs4 import BeautifulSoup
 
 
 def api_request(url: str) -> List[Dict[str, str]]:
-    """Fait une requete au site de Marmiton.
+    """Scrape les titres et liens des resultats de la recherche Marmitton.
+
+    Cette fonction est utile a la fois pour la recherche par ingredient et
+    pour la recherche classique.
 
     Arguments
     ---------
-    url : string: url a envoyer a Marmiton.
+    url : string
+        Url a envoyer a Marmiton.
 
     Return
     -------
-    une liste de Dictionnaire, ou chaque dictionnaire est
-    une recette.
+    out: List[Dict[str, str]]
+        Liste de Dictionnaire, ou chaque dictionnaire est
+        une recette.
     """
     response = requests.get(url)
     soup = BeautifulSoup(response.text, 'html.parser')
@@ -34,16 +39,31 @@ def api_request(url: str) -> List[Dict[str, str]]:
     return resultats_recherche
 
 
+np.array()
+
+
 def recherche_par_ingredients(ingredients: List[str]) -> List[Dict[str, str]]:
-    """Recherche par ingredients et renvoie le resultat de la recherche.
+    """Encode les ingredients dans un url renvoie le resultat de la recherche.
+
+    Cette fonction utilise api_request().
 
     Arguments
     ---------
-    Liste de string: chaque string represente un ingredient
+    ingredients: List[str]
+        Liste de string ou chaque string represente un ingredient
 
     Return
     ------
-    Liste de dictionnaire ou chaque dictionnaire represente une recette
+    out: List[Dict[str,str]]
+        Liste de dictionnaire ou chaque dictionnaire represente une recette
+
+    Exemple
+    -------
+        $ recherche_par_ingredients(['tomate', 'basilic', 'carotte'])
+            [
+                {'title': 'Bolognaise', 'url': 'http://...'},
+                {'title': 'Lasagne', 'url': 'http://...'}
+            ]
     """
     url = 'https://www.marmiton.org/recettes/recherche.aspx?'
     encoded = urlencode({"aqt": "-".join(ingredients), "st": 1})
@@ -56,17 +76,25 @@ def get_recette_par_etape(recipe_url: str) -> Dict[str, List[str]]:
 
     Arguments
     ---------
-    recipe_url: adresse vers la recette a scraper.
+    recipe_url: str
+        Adresse vers la recette a scraper.
 
     Return
     ------
-    Un dictionnaire de cette forme dict_ = {'ingredients': [..], 'etapes':[..]}
+    recipe_dict: Dict[str, List[str]]
+        Un dictionnaire de cette forme:
+        recipe_dict = {
+            'ingredients': [..], 
+            'etapes':[..]
+        }
 
     Exemple:
-    oeuf_a_la_coque = {
+    --------
+
+        oeuf_a_la_coque = {
         'ingredients': ['oeuf'],
         'etapes' : ['faire bouillir de l'eau', 'plonger l'oeuf', ..]
-    }
+        }
     """
     marmiton_url = 'https://www.marmiton.org'
 
@@ -79,19 +107,17 @@ def get_recette_par_etape(recipe_url: str) -> Dict[str, List[str]]:
     # Scrap des ingredients
     ingredients = soup.select('.recipe-ingredients__list__item')
 
-    # Supp. des espaces par exemple 'debut\n\n\n\n\n\n suite'->'debut suite'
-    ingredients = [re.sub(r'\s+', ' ', ing.text.strip())
-                   for ing in ingredients]
-
     # Scrap des etapes
     etapes = soup.select(".recipe-preparation__list__item")
 
-    # Supp. des espaces.
+    # Supp. des espaces par exemple 'debut\n\n\n\n\n\n suite'->'debut suite'
     etapes = [re.sub(r'\s+', ' ', etape.text.strip()) for etape in etapes]
+    ingredients = [re.sub(r'\s+', ' ', ing.text.strip())
+                   for ing in ingredients]
 
-    recipe_dict = {}
-
-    recipe_dict['ingredients'] = ingredients
-    recipe_dict['etapes'] = etapes
+    recipe_dict = {
+        'ingredients': ingredients,
+        'etapes': etapes
+    }
 
     return recipe_dict

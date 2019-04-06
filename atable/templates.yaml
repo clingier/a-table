@@ -1,11 +1,23 @@
-atable_ouverture: Bienvenue sur a table, si vous desirez de l'aide dites 'j'ai besoin d'aide'
+atable_ouverture: Bienvenue sur a table, si vous desirez de l'aide dites 'j'ai besoin d'aide', vous pouvez effectuer une recherche par ingredient ou chercher une recette par titre
 
-atable_rappel: Est ce que vous etes encore la ? Dites moi quand vous etes prets!
+atable_rappel: Est ce que vous etes encore la ? N'hesitez pas a demander de l'aide.
 
-atable_demarrage: Ok super!
+atable_resultat: Voici la recette que j'ai trouve
 
-atable_resultat: Voici les recettes que j'ai trouve
+lecture_ingredient_resultat: Voici les ingredients qu'il vous faut
+
+lecture_ingredient_outro: pour passer a la lecture de la recette dites 'prochaine etape'
+
+lecture_de_recette_intro: Bienvenue sur la lecture de recette a tout moment vous pouvez dire prochaine etape ou etape precedente.
+
+lecture_de_recette_fin: Vous etes arrive au bout de la recette dites stop pour arreter l'application
+
+etape_precedente_erreur: Vous etes au debut de la recette vous ne pouvez pas revenir plus en arriere
+
+aide: Vous pouvez a tout moment arreter l'application en disant Stop. Si vous 
+voulez faire une recherche par ingredient vous pouvez dire 'recherche par
+ingredient' suivi d'une liste d'aliments. Lors d'une lecture de recette vous
+pouvez dire etape suivante pour avancer dans la recette ou etape precedente
+pour reculer.
 
 atable_fin: Fermeture de "a table"
-
-atable_choix_recherche: Voulez vous rechercher une recette par ingredients?
