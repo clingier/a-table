@@ -1,8 +1,9 @@
-"""A-table: Skill Alexa"""
+"""A-table: Skill Alexa."""
 
-from api import get_recette_par_etape, recherche_par_ingredients
 from flask import Flask, render_template
 from flask_ask import Ask, context, delegate, question, session, statement
+
+from api import get_recette_par_etape, recherche_par_ingredients
 from utils import normalize_aliment_lists
 
 app = Flask(__name__)
@@ -10,7 +11,7 @@ ask = Ask(app, '/')
 
 
 @ask.launch
-def atable_welcome() -> None:
+def atable_welcome():
     welcome = render_template('atable_ouverture')
     reprompt = render_template('atable_rappel')
     return question(welcome).reprompt(reprompt)
@@ -21,7 +22,7 @@ def atable_welcome() -> None:
     mapping={
         'aliments_phrase': 'aliments',
     })
-def exec_recherche_par_ingredients(aliments_phrase) -> None:
+def exec_recherche_par_ingredients(aliments_phrase):
     """Execute une recherche par ingredients et propose la recette a l'user.
 
     Arguments
@@ -60,11 +61,11 @@ def exec_recherche_par_ingredients(aliments_phrase) -> None:
 
     # Prend la premiere recette
     titre_recette = recettes[0]['title']
-    return statement(f"{intro}: {titre_recette}")
+    return question(f"{intro}: {titre_recette}. Voulez vous lire la recette?")
 
 
 @ask.intent('AMAZON.YesIntent')
-def when_the_user_says_yes() -> None:
+def when_the_user_says_yes():
     # Est ce que l'utilisateur vient de la question 'Voulez vous cuisiner mnt?'
     want_to_cook = session.attributes.get('dialog_context') == 'prop_recette'
     # On s'assure que l'utilisateur a deja trouve une recette
@@ -112,7 +113,7 @@ def prochaine_etape():
         response += " " + etape
 
     session.attributes['index_etape'] = index
-    return statement(response)
+    return question(response)
 
 
 @ask.intent('AMAZON.PreviousIntent')
@@ -126,11 +127,12 @@ def etape_precedente():
 
     if index == 0 or index == -1:
         response = render_template('etape_precedente_erreur')
-        return statement(response)
+        return question(response)
 
     index -= 1
     etape = etape_recette[index]
-    return statement(etape)
+    session.attributes['index_etape'] = index
+    return question(etape)
 
 
 @ask.intent('AMAZON.RepeatIntent')
@@ -142,22 +144,22 @@ def repete_etape():
     index = session.attributes['index_etape']
 
     if index == -1 or index >= len(etape_recette):
-        return statement("Vous etes arrive au bout de la recette ou vous",
-                         " n'avez pas encore commence")
+        return question("Vous etes arrive au bout de la recette ou vous",
+                        " n'avez pas encore commence")
 
-    etape = statement(etape_recette[index])
+    etape = question(etape_recette[index])
     return etape
 
 
 def aide_usage():
-    return statement(render_template('aide'))
+    return question(render_template('aide'))
 
 
 def lecture_ingredients():
     intro = render_template('lecture_ingredient_resultat')
-    outro = render_template('')
+    outro = render_template('lecture_ingredient_outro')
     ingredients = ", ".join(session.attributes['etape_recette']['ingredients'])
-    return statement(f"{intro} {ingredients} {outro}")
+    return question(f"{intro} {ingredients}. {outro}")
 
 
 @ask.intent('AMAZON.CancelIntent')

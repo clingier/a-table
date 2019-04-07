@@ -14,10 +14,11 @@ lecture_de_recette_fin: Vous etes arrive au bout de la recette dites stop pour a
 
 etape_precedente_erreur: Vous etes au debut de la recette vous ne pouvez pas revenir plus en arriere
 
-aide: Vous pouvez a tout moment arreter l'application en disant Stop. Si vous 
-voulez faire une recherche par ingredient vous pouvez dire 'recherche par
-ingredient' suivi d'une liste d'aliments. Lors d'une lecture de recette vous
-pouvez dire etape suivante pour avancer dans la recette ou etape precedente
-pour reculer.
+aide: 
+- Vous pouvez a tout moment arreter l'application en disant Stop. Si vous 
+- voulez faire une recherche par ingredient vous pouvez dire 'recherche par
+- ingredient' suivi d'une liste d'aliments. Lors d'une lecture de recette vous
+- pouvez dire etape suivante pour avancer dans la recette ou etape precedente
+- pour reculer.
 
 atable_fin: Fermeture de "a table"

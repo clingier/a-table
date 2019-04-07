@@ -4,7 +4,6 @@ from typing import Dict, List
 from urllib.parse import urlencode
 
 import requests
-
 from bs4 import BeautifulSoup
 
 
@@ -37,9 +36,6 @@ def api_request(url: str) -> List[Dict[str, str]]:
             'a', attrs={'class': 'recipe-card-link'}).attrs['href']
         resultats_recherche.append(dict_recette)
     return resultats_recherche
-
-
-np.array()
 
 
 def recherche_par_ingredients(ingredients: List[str]) -> List[Dict[str, str]]:
