@@ -95,7 +95,7 @@ def non():
 @ask.intent('AMAZON.NextIntent')
 def prochaine_etape():
 
-    etape_recette = session.attributes['etape_recette']['etapes']
+    etapes_recettes = session.attributes['etape_recette']['etapes']
     if session.attributes.get('dialog_context') != 'lecture_recette':
         return aide_usage()
 
@@ -106,10 +106,10 @@ def prochaine_etape():
 
     index += 1
 
-    if index >= len(etape_recette):
+    if index >= len(etapes_recettes):
         response = render_template('lecture_de_recette_fin')
     else:
-        etape = etape_recette[index]
+        etape = etapes_recettes[index]
         response += " " + etape
 
     session.attributes['index_etape'] = index
