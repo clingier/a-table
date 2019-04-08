@@ -97,7 +97,7 @@ def prochaine_etape():
 
     if session.attributes.get('dialog_context') != 'lecture_recette':
         return aide_usage()
-    
+
     etape_recette = session.attributes['etape_recette']['etapes']
 
     index = session.attributes['index_etape']
@@ -107,10 +107,10 @@ def prochaine_etape():
 
     index += 1
 
-    if index >= len(etapes_recettes):
+    if index >= len(etape_recette):
         response = render_template('lecture_de_recette_fin')
     else:
-        etape = etapes_recettes[index]
+        etape = etape_recette[index]
         response += " " + etape
 
     session.attributes['index_etape'] = index
