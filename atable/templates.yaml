@@ -2,7 +2,9 @@ atable_ouverture: Bienvenue sur a table, si vous desirez de l'aide dites 'j'ai b
 
 atable_rappel: Est ce que vous etes encore la ? N'hesitez pas a demander de l'aide.
 
-atable_resultat: Voici la recette que j'ai trouve
+atable_resultat_intro: Voici la recette que j'ai trouve
+
+atable_resultat_outro: Voulez vous lire la recette?
 
 lecture_ingredient_resultat: Voici les ingredients qu'il vous faut
 
