@@ -1,7 +1,7 @@
 TO DO LIST
 
 ===============================================================================
-
+DONE
 - Implementation de la recherche vocale par ingredient:
 
     Qu'est ce que c'est?
@@ -34,6 +34,7 @@ TO DO LIST
         la tache a prendre :)
     
 ===============================================================================
+REPORTED
 - Implementation de la recherche par nom de recette:
 
     Qu'est ce que c'est ?
@@ -68,7 +69,7 @@ TO DO LIST
         3) Proposer la recette recue.
 
 ===============================================================================
-
+DONE
 - Implementation de la lecture de recette
 
     Qu'est ce que c'est?
@@ -90,7 +91,7 @@ TO DO LIST
         Se fourer le doigt dans le cul. -> tout creer de zero
 
 ===============================================================================
-
+DONE
 - Realisation d'un petit site web:
     
     Qu'est ce que c'est?
