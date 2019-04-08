@@ -1,0 +1,111 @@
+- Implementation de la recherche par nom de recette:
+
+    Qu'est ce que c'est ?
+    
+    L'utilisateur donne un nom de recette et Alexa lui fait une proposition
+    de recette, la premiere. (Comportement simple qu'on peut etoffer plus tard)
+    
+    "Comment preparer un homard?"
+    "J'ai trouve une recette: Homard a l'armoricaine"
+
+    Qu'est ce qu'il faut faire?
+        1) Recuperer la partie de la phrase definie par alexa comme une variable.
+        pour l'exemple ce serait "un homard"
+        
+        2) Demander la recette a marmiton et prendre le premier resultat.
+
+        3) Proposer la recette recue
+    
+    Qu'est ce qui est fait?
+        None
+
+    Comment faire?
+        Le code sera tres similaire a la recherche par ingredients!
+
+        1) Implementer l'equivalent de la fonction recherche_par_ingredients
+        dans le fichier api.js. La fonction a implementer prendrait une string
+        en argument et renvoie les resultats recus par la fonction api_requests
+
+        2) Faire un lien avec un intent Alex sur amazon (plus complique mais
+        pas impossible )
+
+        3) Proposer la recette recue.
+===============================================================================
+
+
+Proposition de recette
+    Qu'est ce que c'est?
+
+    Lorsqu'alexa a trouve des recettes il faut les proposer et reconnaitre
+    le choix de l'user
+    Exemple:
+    A: "Voici les deux recettes que j'ai trouve: spaghetti, pizza"
+    U: "Pizza" "La premiere"
+    A: "Pizza"
+
+    Qu'est ce qu'il faut faire?
+        1) Dans la phrase recue par Alexa chercher les mots comme premiere,
+        numero un.
+
+        2) Si pas trouve, alors calculer une distance entre le nom de la recette
+        et la phrase de l'user
+
+        3) retourner la recette choisie
+    
+    Qu'est ce qui est fait?
+       None
+
+    Qu'est ce qu'il reste a faire?  
+       Tout
+===============================================================================
+
+Ameliorer la recherche par ingredients:
+    Qu'est ce que c'est?
+    Il faudrait scrapper pour chaque recette les ingredients et comparer la liste
+    avec ceux demander
+
+    Contre-Exemples:
+    "que cuisiner avec des tomates du basilic et du celeri"
+    1: "Saumon papillote: ingredients: tomate, basilic, saumon, mozarella,
+        origan, sel, poivre, des poils de cul, ..."
+
+    2: "Salade de tomate: ingredients: tomates, basilic"
+
+    Le 2 devrait etre le choix...
+
+    Qu'est ce qu'il faut faire?
+
+    pour chaque recette, compter le nombre d'ingredients communs, et assigner
+    a la recette un rapport nombre d'ingredients communs / nombre d'ingredient total
+
+    trier en fonction de ce ratio.
+
+    Pour l'exemple:
+
+    ratio numero 1 = 1 / 9
+    ration numero 2 = 2 / 3
+    
+===============================================================================
+
+Ne pas limiter la recherche a 3 ingredients.
+
+    juste enlever le [:3] dans une fonction...
+
+===============================================================================
+
+Optimiser la session:
+
+    Etudier les autres possibilites pour passer des arguments, peut etre des
+    contexte ? je sais pas
+
+===============================================================================
+
+Cards
+
+    Pour les utilisateurs des Echo Spot et Echo Show -> Description et image
+    de la recette.
+
+    Comment?
+    Googler, un blog explique comment le faire.
+
+    Priorite: -1
