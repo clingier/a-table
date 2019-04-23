@@ -1,3 +1,4 @@
+DONE
 - Implementation de la recherche par nom de recette:
 
     Qu'est ce que c'est ?
@@ -31,8 +32,7 @@
 
         3) Proposer la recette recue.
 ===============================================================================
-
-
+DEPRECATED
 Proposition de recette
     Qu'est ce que c'est?
 
@@ -58,7 +58,7 @@ Proposition de recette
     Qu'est ce qu'il reste a faire?  
        Tout
 ===============================================================================
-
+DEPRECATED
 Ameliorer la recherche par ingredients:
     Qu'est ce que c'est?
     Il faudrait scrapper pour chaque recette les ingredients et comparer la liste
@@ -86,20 +86,20 @@ Ameliorer la recherche par ingredients:
     ration numero 2 = 2 / 3
     
 ===============================================================================
-
+DEPRECATED
 Ne pas limiter la recherche a 3 ingredients.
 
     juste enlever le [:3] dans une fonction...
 
 ===============================================================================
-
+BACKLOGGED  
 Optimiser la session:
 
     Etudier les autres possibilites pour passer des arguments, peut etre des
     contexte ? je sais pas
 
 ===============================================================================
-
+BACKLOGGED
 Cards
 
     Pour les utilisateurs des Echo Spot et Echo Show -> Description et image
